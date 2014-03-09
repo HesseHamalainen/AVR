@@ -46,6 +46,8 @@
   #undef STATUS
   #undef WRITE
 #else
+  #define SERIAL_BAUD 115200
+  
   #undef DEBUG0
   #define DEBUG1
   #define STATUS
@@ -53,8 +55,6 @@
 #endif
 
 #undef DISABLE_WRITE
-
-#define SERIAL_BAUD 115200
 
 #define AIR_INTERVAL 3600 // every hour
 #define AIR_DURATION 120 // for 2 minutes
@@ -178,6 +178,9 @@ void loop(void) {
   #ifdef DELAY
     delay(1000);
   #endif
+  
+  pinMode(13, OUTPUT);
+  digitalWrite(13, !digitalRead(13));
   
 }
 
