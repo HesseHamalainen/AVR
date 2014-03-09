@@ -148,7 +148,6 @@ void loop(void) {
   
   // Do we still need air?
   if (needAir()) {
-    Serial.println("Need air");
     // Yes!
     if (!isAir()) {
       // But we didn't have it YET
@@ -156,7 +155,6 @@ void loop(void) {
     }
   }
   else {
-    Serial.println("No need air");
     // Don't need no air (no more)
     if (isAir()) {
       stopAir();
@@ -191,11 +189,9 @@ boolean isAir(void) {
 
 boolean needAir(void) {
   if (isAir()) {
-    Serial.println("Is air");
     return ((uptime - airStart) < TO_MACHINE_UPTIME(AIR_DURATION));
   }
   else {
-    Serial.println("Not air");
     return (timeSinceAir > TO_MACHINE_UPTIME(AIR_INTERVAL));
   }
 }
