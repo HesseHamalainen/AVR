@@ -25,11 +25,6 @@
  *
  *  EEPROM has write-life of 100,000 to 1,000,000 cycles; do not store uptime too often
  *
- * TODO
- *
- *  Passed time needs to be counter even when powered off
- *  Passed time shall not be counter if airOn when powered off, to ensure necessary air exchange despite of
- *
  */
 
 #include <EEPROMex.h>
