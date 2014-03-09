@@ -254,29 +254,26 @@ void envTemperature() {
   // I don't know, if OneWire / DS18B20 supports requesting ALL devices to do the temperature
   // conversion at once, and then reading them all; until I know better, this will have to do.
   
-  //for(byte i = 0;i < sizeof(Environment.Temperatures) / sizeof(struct Temperature);i++) {
-    struct Temperature *TemperatureDevice = getTemperatureNextDevice();
+  struct Temperature *TemperatureDevice = getTemperatureNextDevice();
 
-    if (conversionRunning) {
+  if (conversionRunning) {
 
-      if ((millis() - conversionStart) > 800) {
-        (*TemperatureDevice).Temperature = Temperature.getTemp((*TemperatureDevice).Address);
-        (*TemperatureDevice).updateTime = millis();
+    if ((millis() - conversionStart) > 800) {
+      (*TemperatureDevice).Temperature = Temperature.getTemp((*TemperatureDevice).Address);
+      (*TemperatureDevice).updateTime = millis();
         
-        conversionRunning = false;
-      }
-      else {
-        // Let the good times roll.. a bit more
-      }
+      conversionRunning = false;
     }
     else {
-      Temperature.startConversion((*TemperatureDevice).Address, false);
-      
-      conversionRunning = true;
-      conversionStart = millis();
+      // Let the good times roll.. a bit more
     }
-    
-  //}
+  }
+  else {
+    Temperature.startConversion((*TemperatureDevice).Address, false);
+      
+    conversionRunning = true;
+    conversionStart = millis();
+  }
   
 }
 
