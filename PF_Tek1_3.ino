@@ -32,8 +32,8 @@
 #define TO_HUMAN_UPTIME(X)  (unsigned long)X/1000
 #define TO_MACHINE_UPTIME(X)  (unsigned long)X*1000
 
-#define SECONDS_IN_DAY  (unsigned long)(60 * 60 * 24);
-#define SECONDS_IN_HOUR  (unsigned long)(60 * 60);
+#define SECONDS_IN_DAY  (unsigned long)(60 * 60 * 24)
+#define SECONDS_IN_HOUR  (unsigned long)(60 * 60)
 
 #define DEBUG
 #undef DISABLE_WRITE
@@ -161,6 +161,7 @@ void startAir(void) {
   #endif
   
   airStart = uptime;
+  
   #ifndef DISABLE_WRITE
     EEPROM.updateByte(addressAirStatus, (uint8_t)1);
   #endif
@@ -191,6 +192,7 @@ void storeUptime(void) {
   #endif
   
   uptimeStoreTime = uptime;
+  
   #ifndef DISABLE_WRITE
     EEPROM.writeLong(addressUptime, uptime);
   #endif
@@ -200,10 +202,10 @@ void serialPrint(void) {
 
   unsigned long uptime_seconds = TO_HUMAN_UPTIME(uptime);
   
-  int days = uptime_seconds / SECONDS_IN_DAY;
-  int hours = uptime_seconds / SECONDS_IN_HOUR;
-  int minutes = uptime_seconds / 60;
-  int seconds = uptime_seconds % 60;
+  unsigned long days = uptime_seconds / (SECONDS_IN_DAY);
+  unsigned long hours = (uptime_seconds / SECONDS_IN_HOUR) % 24;
+  unsigned long minutes = (uptime_seconds / 60) % 60;
+  unsigned int seconds = uptime_seconds % 60;
   
   Serial.print(days); Serial.print(" days ");
   Serial.print(hours); Serial.print(" hours ");
