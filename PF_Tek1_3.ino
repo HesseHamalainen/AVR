@@ -5,7 +5,7 @@
  *
  * DESCRIPTION
  *
- * Systems keeps uptime stored in eeprom, and writes it there every defined
+ * System keeps uptime stored in eeprom, and writes it there every defined
  * interval, to avoid loss of uptime data.
  *
  * This uptime information is then used to keep air change somewhat constant
